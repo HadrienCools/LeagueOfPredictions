@@ -13,3 +13,8 @@ NN using tensorflow to predict winner team based on informations given by LOLAPI
 * Lambda variable
 * Feature selection
 * ...
+
+### Auteurs
+
+* Yannick Berckmans
+* Cools Hadrien
