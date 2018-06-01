@@ -2,7 +2,7 @@
 NN using tensorflow to predict winner team based on informations given by LOLAPI V2
 
 * Populate sert à consrtruire le dataSet
-* Network sert à crér le shéma et le réseau de neurones dans lequels les données seront utilisées
+* Network sert à créer le shéma et le réseau de neurones dans lequels les données seront utilisées
 
 
 
