@@ -23,7 +23,7 @@ Base de données où sont stockés les données relatives aux différentes parti
 Fichier principal, il contient la mise en forme des données sous forme d'un vecteur devenant plus tard les features d'entrée du réseau de neurones.
 Il contient le schéma du réseau de neurones, les opérations qu'il devra effectuer et  l'enchainement logique de ces opérations. 
 Il contient une boucle permettant l'entrainement avec le dataset proposé en entrée.
-Il est possible de rentrer un nombre d'itérations, correspondant au nombre de fois ou le réseau va être entrainé, apres chaque entrainement le réseau est testé. 
+Il est possible de rentrer un nombre d'itérations, correspondant au nombre de fois ou le réseau va être entrainé, après chaque entrainement le réseau est testé. 
 
 
 ## Améliorations 
