@@ -3,7 +3,7 @@
 
 ## Présentation du projet
 
-Le projet a pour but de determiner la victoire de l'équipe bleue ou l'équipe rouge du célèbre jeu "League Of Legends".
+Le projet a pour but de déterminer la victoire de l'équipe bleue ou l'équipe rouge du célèbre jeu "League Of Legends".
 Pour cela il utilise un réseau de neurones établissant des prédictions sur base de features extraites de l'API LOL V2.
 
 * Il faut garder en tête que le jeu contient beaucoup d'aléatoire et que le facteur humain est présent, il n'y a donc aucunes certitudes.
