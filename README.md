@@ -12,7 +12,7 @@ Pour cela il utilise un réseau de neurones établissant les prédictions sur ba
 
 ### Populate.py
 
-C'est le script appelant l'API, elle s'occupe des appels et extrait les données importantes de chaques matchs et les informations relatives aux matchs (Champions utilisés, expériance des joueurs, taux de victoire des joueurs).
+Script appelant l'API, il s'occupe des appels et extrait les données importantes de chaques matchs et les informations relatives aux matchs (Champions utilisés, expériance des joueurs, taux de victoire des joueurs).
 
 ### data.db
 
