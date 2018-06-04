@@ -27,7 +27,7 @@ Il est possible de rentrer un nombre d'itérations, correspondant au nombre de f
 
 
 ## Améliorations 
-* Softmax pour normaliser les données d'entrées, le réseau a du mal à s'entrainer.
+* Softmax pour normaliser les données d'entrée, le réseau a du mal à s'entrainer.
 * Relu, voir le comportement en utilisant une autre fonction non linéaire.
 * Lambda variable, voir le comportement en fonction du facteur d'apprentissage.
 * Feature selection, sélectionner mieux les données et plus de données pour avoir plus de features .
