@@ -10,9 +10,6 @@ import time
 sqlite3 gesture
 -------------------------------------------
 '''
-
-
-
 def connectDb():
 	conn = sqlite3.connect('data.db')
 	c = conn.cursor()
@@ -26,8 +23,7 @@ def closeDb(c, conn):
 	except:
 		return False
 	
-# Gather information from DB
-	
+# Gather information from DB	
 def getGamesFromDB():
 	[conn,c] = connectDb()
 	gamesList = []
@@ -36,8 +32,6 @@ def getGamesFromDB():
 		games = c.execute("SELECT * FROM matches;")
 	except:
 		print("Error loading games")
-	
-	
 	for game in games:
 		#summonerId int, char_id int, side string, char_global_wr long, mastery_point long, elo long)'.format(id))
 		gameInfo = {
@@ -105,8 +99,6 @@ def convertToSimpleArray(players):
         
     return [myTupleBlue,myTupleRed]
 
-
-
 def converToTuple(players):
     myTupleBlue = []
     myTupleRed = []
@@ -147,7 +139,6 @@ def get_dataset(gameList):
     """
 
     games = []
-
     outcomeMatches = []
     features1 = []
     features2 = []
@@ -211,12 +202,14 @@ def get_dataset(gameList):
 
     return features, targets
 
+#------------------------------------
+# Main function
+#------------------------------------
 if __name__ == '__main__':
 
     #Contain match ID and the outcome for every games
     gameList = getGamesFromDB()
 
-    #print("test23")
     print('gameslist',gameList)
 
     features, targets = get_dataset(gameList)
@@ -231,28 +224,35 @@ if __name__ == '__main__':
     tf_targets = tf.placeholder(tf.float32, shape=[None, 1])
 
     # First
-    w1 = tf.Variable(tf.random_normal([50, 3])) # poids
-    #chaque caracteristique aura 3 poids associés
-    b1 = tf.Variable(tf.zeros([3])) # biais
+    w1 = tf.Variable(tf.random_normal([50, 10])) # weight
+    b1 = tf.Variable(tf.zeros([10])) # biais
     # Operations
     z1 = tf.matmul(tf_features, w1) + b1
     a1 = tf.nn.sigmoid(z1)
 
-    # Output neuron
-    w2 = tf.Variable(tf.random_normal([3, 1]))
-    b2 = tf.Variable(tf.zeros([1]))
+    # second layer
+    w2 = tf.Variable(tf.random_normal([10, 2])) # weight
+    # 
+    b2 = tf.Variable(tf.zeros([2])) # biais
     # Operations
     z2 = tf.matmul(a1, w2) + b2
-    py = tf.nn.sigmoid(z2)
+    a2 = tf.nn.sigmoid(z2)
+
+    # Output neuron
+    w3 = tf.Variable(tf.random_normal([2, 1]))
+    b3 = tf.Variable(tf.zeros([1]))
+    # Operations
+    z3 = tf.matmul(a2, w3) + b3
+    py = tf.nn.sigmoid(z3)
 
     cost = tf.reduce_mean(tf.square(py - tf_targets))
 
     correct_prediction = tf.equal(tf.round(py), tf_targets)
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-    # on utilise un optimiser qui va effectuer l opération de la descente de gradient
-    optimizer = tf.train.GradientDescentOptimizer(learning_rate=200000001)# on lui donne un learning rate les 
-    train = optimizer.minimize(cost) # opération d entrainemenet utilisant l optimiser en vue de minimiser le cout
+    # Optimiser based on gradient descend algo
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.125)# learning rate
+    train = optimizer.minimize(cost) # execution of optimization operation based on previons operations
 
     sess = tf.Session()
     sess.run(tf.global_variables_initializer()) 
@@ -267,26 +267,24 @@ if __name__ == '__main__':
     print("b1 = ", sess.run(b1))
     print("z1 = ", sess.run(z1, feed_dict={
         tf_features: features
-    })) #donnez la valeur de preactivation du neurone
-    # on prend la premiere valeur de l array et on le mukltiplie par le poids associe et on lui ajoute lavaleur du biaius. 
-    # donnant la valeur de lma preactivation, grace a la focntion matmul
-    #dans l exemple on a des valeur qui sont assez greande il aurait ezte bien de les normaliser
+    })) # pre activation of neurons
+    # first value of vector times weight plus biais
+    # 'donnant la valeur de la preactivation, grace a la fonction matmul'
+    # SoftMax would be usefull cause values are in high range
     print('Probabilité avec la sigmoid', sess.run(a1, feed_dict={
         tf_features: features
     }))
 
-    # calcul de l erreur
-    #calculer l erreur ensortie du reseau de neurone
-
+    # error calcul on output
     print('cout de la fonction ', sess.run(cost, feed_dict={
         tf_features: features,
         tf_targets: targets
     }))
-    # prediction - erreur au carée
+    # prediction - root square of the error
 
     # ------------------------------------------------------------
-    # une session d entrainemeent
-    # expliquer la descente de gradient, l optimiser la fonction de reduction de cout. 
+    # trainning session
+    # during this session itteration we ll adjust weight based on optimization function
     """print("avant entrainement w1", sess.run(w1))
     print("avant  entrainement b1 = ", sess.run(b1))
     sess.run(train, feed_dict={
@@ -297,7 +295,7 @@ if __name__ == '__main__':
     print("apres entrainement b1 = ", sess.run(b1))"""
 
     #--------------------------------------------------------------
-    for e in range(100):
+    for e in range(10000):
 
         sess.run(train, feed_dict={
             tf_features: features,
@@ -307,4 +305,9 @@ if __name__ == '__main__':
         print("accuracy =", sess.run(accuracy, feed_dict={
             tf_features: features,
             tf_targets: targets
-}))
+        }))
+        print("certitude de victoire de l'équipe bleue =", 1-sess.run(py, feed_dict={
+            tf_features: features,
+            tf_targets: targets
+        }))
+        
