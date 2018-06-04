@@ -3,8 +3,8 @@
 
 ## Présentation du projet
 
-Le projet à pour but de determiner la victoire de l'équipe bleue ou l'équipe rouge du célèbre jeu "League Of Legends".
-Pour cela il utilise un réseau de neurones établissant les prédictions sur base des features extraites de l'API LOL V2.
+Le projet a pour but de determiner la victoire de l'équipe bleue ou l'équipe rouge du célèbre jeu "League Of Legends".
+Pour cela il utilise un réseau de neurones établissant des prédictions sur base de features extraites de l'API LOL V2.
 
 * Il faut garder en tête que le jeu contient beaucoup d'aléatoire et que le facteur humain est présent, il n'y a donc aucunes certitudes.
 
@@ -12,7 +12,7 @@ Pour cela il utilise un réseau de neurones établissant les prédictions sur ba
 
 ### Populate.py
 
-Script appelant l'API, il s'occupe des appels et extrait les données importantes de chaques matchs et les informations relatives aux matchs (Champions utilisés, expériance des joueurs, taux de victoire des joueurs).
+Script appelant l'API, il s'occupe des appels et extrait les données importantes de chaques matchs et les informations relatives (Champions utilisés, expériance des joueurs, taux de victoire des joueurs).
 
 ### data.db
 
