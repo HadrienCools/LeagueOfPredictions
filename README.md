@@ -4,7 +4,7 @@
 ## Présentation du projet
 
 Le projet a pour but de déterminer la victoire de l'équipe bleue ou l'équipe rouge du célèbre jeu "League Of Legends".
-Pour cela il utilise un réseau de neurones établissant des prédictions sur base de features extraites de l'API LOL V2.
+Pour cela il utilise un réseau de neurones établissant des prédictions sur base de features extraites de l'API LOL V3.
 
 * Il faut garder en tête que le jeu contient beaucoup d'aléatoire et que le facteur humain est présent, il n'y a donc aucunes certitudes.
 
@@ -34,7 +34,7 @@ Deux opérations sont disponnibles
 * Remplir la base de données avec des appels à l'API, il faut simplemnt inserer sa clée dans le code pour pouvoir effectuer les appels, la clé expire tous les 24H.
 ** S'inscrire et demander une clé [sur le site.](https://developer.riotgames.com/)
 * Pour la génération du réseau de neurone et l'entrainement, utiliser le fichier network.py
-** Utiliser la commande'python network.py' les résultats seront affichés en sortie.
+  ** Utiliser la commande'python network.py' les résultats seront affichés en sortie.
 
 ## Améliorations 
 * Softmax pour normaliser les données d'entrée, le réseau a du mal à s'entrainer.
