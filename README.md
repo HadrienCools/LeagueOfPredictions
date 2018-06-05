@@ -35,6 +35,13 @@ Il est possible de rentrer un nombre d'itérations, correspondant au nombre de f
 * Augmenter la taille des sets.
 * ...
 
+### Sources
+[API League Of Legends](https://developer.riotgames.com/api-methods/)
+[Champion.GG API](http://api.champion.gg/)
+[Tutoriel Tensorflow](https://www.youtube.com/watch?v=O9yl9KKKoQI)
+[Projet similaire discutant des aspects utilisés](https://github.com/apovedamckay/LoL-neural-network)
+[Projet d'analyse de partie](https://github.com/vingtfranc/LoLAnalyzer)
+
 ### Auteurs
 
 * Yannick Berckmans
