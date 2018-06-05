@@ -25,6 +25,16 @@ Il contient le schéma du réseau de neurones, les opérations qu'il devra effec
 Il contient une boucle permettant l'entrainement avec le dataset proposé en entrée.
 Il est possible de rentrer un nombre d'itérations, correspondant au nombre de fois ou le réseau va être entrainé, après chaque entrainement le réseau est testé. 
 
+## Utilisation 
+* Avoir python > 3.5.
+* Installer Tensorflow - matplotlib - numpy.
+* Pour windows l'installation peut rencontrer des erreurs, [des solutions sont proposées dans ce thread.](https://github.com/tensorflow/tensorflow/issues/5949)
+* Cloner dans le répo 'git clone https://github.com/HadrienCools/LeagueOfPredictions.git'
+Deux opérations sont disponnibles
+* Remplir la base de données avec des appels à l'API, il faut simplemnt inserer sa clée dans le code pour pouvoir effectuer les appels, la clé expire tous les 24H.
+** S'inscrire et demander une clé [sur le site.](https://developer.riotgames.com/)
+* Pour la génération du réseau de neurone et l'entrainement, utiliser le fichier network.py
+** Utiliser la commande'python network.py' les résultats seront affichés en sortie.
 
 ## Améliorations 
 * Softmax pour normaliser les données d'entrée, le réseau a du mal à s'entrainer.
