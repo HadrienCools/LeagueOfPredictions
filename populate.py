@@ -443,44 +443,45 @@ def multiplePopulate():
 	
 
 
+if __name__ == "__main__":
+    
+
+	#Values definition
+
+	#NEED TO FETCH THE CURRENT PATCH
+	patch = 8.7
 
 
-#Values definition
+	key = 'RGAPI-c0f00d89-722e-4e6b-8342-3ae9bef81c73'
+	championGGApiKey='8c07f22da47161cb742890f40ce828ee'
 
-#NEED TO FETCH THE CURRENT PATCH
-patch = 8.7
+	featuredGamesURL = 'https://na1.api.riotgames.com//lol/spectator/v3/featured-games'
+	matchInfoURL = 'https://na1.api.riotgames.com/lol/match/v3/matches'
+	masteriesCharInfo = ['https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/','/by-champion/']
+	leaguePointsURL = "https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/"
 
+	#match type IDs
+	srDraft = 400
+	srRankedSolo = 420
+	srBlindPick = 430
+	srRankedFlex = 440
 
-key = 'RGAPI-c0f00d89-722e-4e6b-8342-3ae9bef81c73'
-championGGApiKey='8c07f22da47161cb742890f40ce828ee'
+	#db
+	[c,conn] = configDb()
+	#--!-- THE FIRST TIME, WE NEED TO CREATE THE GLOBAL MATCHES TABLE
+	createMatchesTable(c)
+	#createMatchTable(2760944266)
+	#insertIntoMatchesTable(12, "red")
+	#c.execute("INSERT INTO matches VALUES(?,?)",(int(12),str("blue")))
+	#c.execute("INSERT INTO `{}` VALUES(?,?,?,?,?,?)".format(2760944266), (12,12,"blue",58,12,12))
+	#c.execute("INSERT INTO `{}` VALUES(?,?,?,?,?,?)".format(id), (int(params["player_id"]),int(params["char_id"]),str(params["side"]),long(params["char_global_wr"]),long(params["mastery_point"]),long(params["elo"])))
+	#insertIntoMatchTable(2760944266,{"player_id":13,"char_id":13, "side":"blue","char_global_wr":59,"mastery_point":12000,"elo":1455})
 
-featuredGamesURL = 'https://na1.api.riotgames.com//lol/spectator/v3/featured-games'
-matchInfoURL = 'https://na1.api.riotgames.com/lol/match/v3/matches'
-masteriesCharInfo = ['https://na1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/','/by-champion/']
-leaguePointsURL = "https://na1.api.riotgames.com/lol/league/v3/positions/by-summoner/"
+	#remplissage db
 
-#match type IDs
-srDraft = 400
-srRankedSolo = 420
-srBlindPick = 430
-srRankedFlex = 440
+	multiplePopulate()
 
-#db
-[c,conn] = configDb()
-#--!-- THE FIRST TIME, WE NEED TO CREATE THE GLOBAL MATCHES TABLE
-createMatchesTable(c)
-#createMatchTable(2760944266)
-#insertIntoMatchesTable(12, "red")
-#c.execute("INSERT INTO matches VALUES(?,?)",(int(12),str("blue")))
-#c.execute("INSERT INTO `{}` VALUES(?,?,?,?,?,?)".format(2760944266), (12,12,"blue",58,12,12))
-#c.execute("INSERT INTO `{}` VALUES(?,?,?,?,?,?)".format(id), (int(params["player_id"]),int(params["char_id"]),str(params["side"]),long(params["char_global_wr"]),long(params["mastery_point"]),long(params["elo"])))
-#insertIntoMatchTable(2760944266,{"player_id":13,"char_id":13, "side":"blue","char_global_wr":59,"mastery_point":12000,"elo":1455})
+	#print(fetchFromDB(c, 'select * from `2760944266`').fetchone())
 
-#remplissage db
-
-multiplePopulate()
-
-#print(fetchFromDB(c, 'select * from `2760944266`').fetchone())
-
-#close DB
-print(closeDb(c,conn))
+	#close DB
+	print(closeDb(c,conn))
