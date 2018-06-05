@@ -82,7 +82,7 @@ def convertToSimpleArray(players):
     for player in players:
         playerTuple = []
         player['side'] = 0 if player['side'] == 'blue' else 1
-#        print(player)
+        # print(player)
         for value in player:
             if(value == 'summonerId'):
                 continue
@@ -107,7 +107,7 @@ def converToTuple(players):
     for player in players:
         playerTuple = []
         player['side'] = 0 if player['side'] == 'blue' else 1
-#        print(player)
+        # print(player)
         for value in player:
           playerTuple.append(player[value])
         if(player['side'] == 0):
@@ -122,15 +122,11 @@ def converToTuple(players):
         
     return myTuple
 
-
-	
 """if __name__ == '__main__':
 	gameList = getGamesFromDB()
 	for game in gameList:
 		gameInfo = getInfoFromGame(game)
 		print(gameInfo)"""
-	
-
 
 def get_dataset(gameList):
     """
@@ -205,6 +201,7 @@ def get_dataset(gameList):
 #------------------------------------
 # Main function
 #------------------------------------
+
 if __name__ == '__main__':
 
     #Contain match ID and the outcome for every games
@@ -222,6 +219,10 @@ if __name__ == '__main__':
     #print(len(features[1]), 'lenfeat')
     tf_features = tf.placeholder(tf.float32, shape=[None, 50])
     tf_targets = tf.placeholder(tf.float32, shape=[None, 1])
+
+    #------------
+    # NN build
+    #------------
 
     # First
     w1 = tf.Variable(tf.random_normal([50, 10])) # weight
@@ -250,7 +251,7 @@ if __name__ == '__main__':
     correct_prediction = tf.equal(tf.round(py), tf_targets)
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
-    # Optimiser based on gradient descend algo
+    # Optimiser based on gradient descend algorithm
     optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.125)# learning rate
     train = optimizer.minimize(cost) # execution of optimization operation based on previons operations
 
@@ -267,7 +268,7 @@ if __name__ == '__main__':
     print("b1 = ", sess.run(b1))
     print("z1 = ", sess.run(z1, feed_dict={
         tf_features: features
-    })) # pre activation of neurons
+    })) # pre activation of neuron
     # first value of vector times weight plus biais
     # 'donnant la valeur de la preactivation, grace a la fonction matmul'
     # SoftMax would be usefull cause values are in high range
@@ -281,7 +282,6 @@ if __name__ == '__main__':
         tf_targets: targets
     }))
     # prediction - root square of the error
-
     # ------------------------------------------------------------
     # trainning session
     # during this session itteration we ll adjust weight based on optimization function
@@ -295,18 +295,26 @@ if __name__ == '__main__':
     print("apres entrainement b1 = ", sess.run(b1))"""
 
     #--------------------------------------------------------------
+    # Execution of the graph, trainning and accuracy measurement
+    # Number of iteration for trainning (10 000) for exemple
+    # -------------------------------------------------------------
+
     for e in range(10000):
 
+        # training step based on gradient descend method 
         sess.run(train, feed_dict={
             tf_features: features,
             tf_targets: targets
         })
-
-        print("accuracy =", sess.run(accuracy, feed_dict={
+        # !!!!!! HERE we have to generate a testing dataset, because we are testing our accuracy on same dataset (we test on trainning dataset ->> very bad)
+        # If we dont have a lot of values we can une leave one value cross validation (we just ll keep on data for test from trainning set each iteration)
+        # Accuracy value is not relevent cause of overfitting actually
+        print("accuracy !! =", sess.run(accuracy, feed_dict={
             tf_features: features,
             tf_targets: targets
         }))
-        print("certitude de victoire de l'équipe bleue =", 1-sess.run(py, feed_dict={
+        # take pre activation value before decision ( 0 or 1 -> red team or blue team win) to get percentage of win for each match
+        print("certitude de victoire pour chaque match de l'équipe bleue =", 1-sess.run(py, feed_dict={
             tf_features: features,
             tf_targets: targets
         }))
